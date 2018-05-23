@@ -1,6 +1,9 @@
 package controllers
 
-import "github.com/astaxie/beego"
+import (
+	"github.com/astaxie/beego"
+	"fmt"
+)
 
 type EditorController struct{
 	beego.Controller
@@ -9,3 +12,9 @@ type EditorController struct{
 func (this* EditorController) Get(){
 	this.TplName = "editor.html"
 }
+func (this* EditorController) Post(){
+	content:=this.GetString("content")
+	fmt.Println(content)
+	this.Ctx.WriteString("ok")
+}
+

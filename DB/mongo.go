@@ -1,7 +1,7 @@
 package DB
 
 import (
-	"../Config"
+	"github.com/astaxie/beego"
 	"fmt"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"

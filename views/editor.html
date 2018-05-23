@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>editor</title>
     <!-- bootstrap -->
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -9,18 +9,19 @@
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- editor.md -->
-    <link rel="stylesheet" href="../static/editor/css/style.css" />
-    <link rel="stylesheet" href="../static/editor/css/editormd.css" />
+    <link rel="stylesheet" href="../static/editor/css/style.css"/>
+    <link rel="stylesheet" href="../static/editor/css/editormd.css"/>
 
     <style type="text/css" media="screen">
-    .container{
+    .container {
         width: 92%;
         margin-top: 10px;
         margin-bottom: 20px;
         /*background: #d377d4;*/
     }
+
     /*发布按钮*/
-    #public{
+    #public {
         background: #4682B4;
         width: 150px;
         height: 65px;
@@ -30,12 +31,13 @@
     }
 
     /*选择分类*/
-    #newTypeInput{
+    #newTypeInput {
         float: left;
         width: 30%;
         margin-left: 20px;
     }
-    #choseTypeTitle{
+
+    #choseTypeTitle {
         float: left;
         margin-top: 5px;
         margin-left: 50px;
@@ -43,27 +45,28 @@
         color: #00BFFF;
     }
 
-    #bottom{
+    #bottom {
         width: 92%;
         height: 200px;
         padding-bottom: 50px;
     }
-    #choseType{
-        float:left;
-        width:60%;
-        line-height:50px;
+
+    #choseType {
+        float: left;
+        width: 60%;
+        line-height: 50px;
         height: 100%;
-        overflow:auto;
+        overflow: auto;
     }
 
-
-    #publicDiv{
-        float:left;
-        width:40%;
+    #publicDiv {
+        float: left;
+        width: 40%;
         height: 100%;
-        line-height:100px;  
+        line-height: 100px;
     }
-    .typeCheckBoxDiv{
+
+    .typeCheckBoxDiv {
         width: 120px;
         float: left;
         padding-top: 10px;
@@ -92,10 +95,9 @@
         <div id="test-editormd"></div>
 
         <div class="container">
-            <input id="newTypeInput" type="text" class="form-control" id="newType" placeholder="输入新分类">
-            <h3 id="choseTypeTitle">选择分类</h3>
+            <input id="newTypeInput" type="text" class="form-control" placeholder="输入新分类">
+            <h3 id="choseTypeTitle">增加新分类</h3>
         </div>
-        
 
 
         <div id="bottom" class="container">
@@ -113,7 +115,6 @@
                     <div class="typeCheckBoxDiv">
                         <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
                     </div>
-
                 </dl>
                 <dl>
                     <div class="typeCheckBoxDiv">
@@ -128,7 +129,6 @@
                     <div class="typeCheckBoxDiv">
                         <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
                     </div>
-
                 </dl>
                 <dl>
                     <div class="typeCheckBoxDiv">
@@ -143,23 +143,6 @@
                     <div class="typeCheckBoxDiv">
                         <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
                     </div>
-
-                </dl>
-
-                <dl>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-
                 </dl>
 
             </div>
@@ -175,23 +158,31 @@
     <script src="../static/editor/js/jquery.min.js"></script>
     <script src="../static/editor/js/editormd.min.js"></script>
     <script type="text/javascript">
-     var testEditor;
-     $(function() {                
-        testEditor = editormd("test-editormd", {
-            width        : "90%",
-            height       : 640,
-            // readOnly     : true,
-            // watch        : false, 
-            theme        : (localStorage.theme) ? localStorage.theme : "default",
-            previewTheme : (localStorage.previewTheme) ? localStorage.previewTheme : "default", 
-            editorTheme  : (localStorage.editorTheme) ? localStorage.editorTheme : "default", 
-            path         : '../static/editor/lib/'
-        });
+        var testEditor;
+        $(function () {
+            testEditor = editormd("test-editormd", {
+                width: "90%",
+                height: 640,
+                theme: (localStorage.theme) ? localStorage.theme : "default",
+                previewTheme: (localStorage.previewTheme) ? localStorage.previewTheme : "default",
+                editorTheme: (localStorage.editorTheme) ? localStorage.editorTheme : "default",
+                path: '../static/editor/lib/'
+            });
 
-        $('#public').on('click', function (event) {
-            console.log(testEditor.getMarkdown());
+            $('#public').on('click', function (event) {
+                var articleContent = testEditor.getMarkdown();
+
+                console.log(articleContent);
+                $.post("/editor",{"content":articleContent},function (data) {
+                    if(data == "ok"){
+                        if(confirm("博客发布成功！")){
+                            console.log("----------");
+                            $.get("/showArticle",{"showArticle":articleContent});
+                        }
+                    }
+                })
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
