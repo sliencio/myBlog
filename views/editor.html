@@ -88,69 +88,73 @@
     </nav>
 
     <div class="container-fluid">
-        <div class="container">
-            <input type="text" class="form-control" id="name" placeholder="请输入文章标题">
-        </div>
-
-        <div id="test-editormd"></div>
-
-        <div class="container">
-            <input id="newTypeInput" type="text" class="form-control" placeholder="输入新分类">
-            <h3 id="choseTypeTitle">增加新分类</h3>
-        </div>
-
-
-        <div id="bottom" class="container">
-            <div id="choseType">
-                <dl>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                </dl>
-                <dl>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                </dl>
-                <dl>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                    <div class="typeCheckBoxDiv">
-                        <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
-                    </div>
-                </dl>
-
+        <form action="/article/publish" method="post">
+            <div class="container">
+                <input type="text" name="title" class="form-control" id="name" placeholder="请输入文章标题">
             </div>
 
-            <div id="publicDiv">
-                <button id="public" type="button" class="btn btn-success">public</button>
+            <div id="test-editormd"></div>
+
+            <div class="container">
+                <input id="newTypeInput" type="text" name="newType" class="form-control" placeholder="输入新分类">
+                <h3 id="choseTypeTitle">增加新分类</h3>
             </div>
-        </div>
+
+
+            <div id="bottom" class="container">
+                <div id="choseType">
+                    <dl>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                    </dl>
+                    <dl>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                    </dl>
+                    <dl>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                        <div class="typeCheckBoxDiv">
+                            <input type="radio" class="typeCheckBox" value="option2" name="aaa"> 选项 2</input>
+                        </div>
+                    </dl>
+
+                </div>
+
+                <div id="publicDiv">
+                    <button id="public" type="submit" class="btn btn-success">public</button>
+                </div>
+            </div>
+
+        </form>
+
 
     </div>
 
@@ -170,17 +174,24 @@
             });
 
             $('#public').on('click', function (event) {
-                var articleContent = testEditor.getMarkdown();
+                // var articleContent = testEditor.getMarkdown();
 
-                console.log(articleContent);
-                $.post("/editor",{"content":articleContent},function (data) {
-                    if(data == "ok"){
-                        if(confirm("博客发布成功！")){
-                            console.log("----------");
-                            $.get("/showArticle",{"showArticle":articleContent});
-                        }
-                    }
-                })
+                // console.log(articleContent);
+                // $.ajax({
+                //     async: false,
+                //     type:"POST",
+                //     url:"/article/publish",
+                //     data:{"content":articleContent}
+                // })
+
+
+                // $.post("/article/publish",{"content":articleContent},function (data) {
+                //     // if(data == "ok"){
+                //     //     if(confirm("博客发布成功！")){
+                //     //         // $.get("/showArticle","content="+articleContent);
+                //     //     }
+                //     // }
+                // })
             });
         });
     </script>

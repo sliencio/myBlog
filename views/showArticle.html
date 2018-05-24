@@ -20,23 +20,6 @@
         /*background: #d377d4;*/
     }
 
-    /*发布按钮*/
-    #public {
-        background: #4682B4;
-        width: 150px;
-        height: 65px;
-        margin-left: 30px;
-        margin-top: 40px;
-        font-size: 20px;
-    }
-
-    /*选择分类*/
-    #newTypeInput {
-        float: left;
-        width: 30%;
-        margin-left: 20px;
-    }
-
     #choseTypeTitle {
         float: left;
         margin-top: 5px;
@@ -45,36 +28,10 @@
         color: #00BFFF;
     }
 
-    #bottom {
-        width: 92%;
-        height: 200px;
-        padding-bottom: 50px;
-    }
-
-    #choseType {
-        float: left;
-        width: 60%;
-        line-height: 50px;
-        height: 100%;
-        overflow: auto;
-    }
-
-    #publicDiv {
-        float: left;
-        width: 40%;
-        height: 100%;
-        line-height: 100px;
-    }
-
-    .typeCheckBoxDiv {
-        width: 120px;
-        float: left;
-        padding-top: 10px;
-        padding-left: 50px;
-    }
 </style>
 </head>
 <body>
+    <p id="articleData">{{.showArticle}}</p>
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <!-- {{/*标题*/}} -->
@@ -94,29 +51,23 @@
 
         <div id="test-editormd"></div>
     </div>
-    <div id="publicDiv">
-        <button id="public" type="button" class="btn btn-success">public</button>
-    </div>
 
     <script src="../static/editor/js/jquery.min.js"></script>
     <script src="../static/editor/js/editormd.min.js"></script>
     <script type="text/javascript">
         var testEditor;
         $(function () {
+            var test = $('#articleData').text();
             testEditor = editormd("test-editormd", {
-                width: "90%",
-                height: 640,
+                width        : "90%",
+                autoHeight   : true,
                 readOnly     : true,
                 watch        : false,
-                theme: (localStorage.theme) ? localStorage.theme : "default",
-                previewTheme: (localStorage.previewTheme) ? localStorage.previewTheme : "default",
-                editorTheme: (localStorage.editorTheme) ? localStorage.editorTheme : "default",
-                path: '../static/editor/lib/'
-            });
-            var test = "dsfsdfdsfdsfds";
-
-            $('#public').on('click', function (event) {
-                $('.editormd-markdown-textarea').text(test+"sdfsdfdsf");
+                markdown     : test,
+                theme        : (localStorage.theme) ? localStorage.theme : "default",
+                previewTheme : (localStorage.previewTheme) ? localStorage.previewTheme : "default",
+                editorTheme  : (localStorage.editorTheme) ? localStorage.editorTheme : "default",
+                path         : '../static/editor/lib/'
             });
         });
     </script>

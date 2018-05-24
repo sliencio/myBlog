@@ -26,7 +26,7 @@ func init() {
 
 //连接数据库
 func (operater *Operater) connect() error {
-	mogsession, err := mgo.Dial(beego.AppConfig.String("dbName"))
+	mogsession, err := mgo.Dial(beego.AppConfig.String("dbUrl"))
 	if err != nil {
 		fmt.Println(err)
 		return err
