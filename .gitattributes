@@ -1,4 +1,4 @@
-*.js linguist-language=javascript
-*.css linguist-language=css
-*.html linguist-language=html
-*.go linguist-language=go
+*.js linguist-language=golang
+*.css linguist-language=golang
+*.html linguist-language=golang
+*.go linguist-language=golang
